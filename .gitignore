@@ -1,0 +1,8 @@
+## ignoring excelfiles
+*.xlsx
+*.xlsm
+*.xlsb
+*.xlam
+*.xltx
+*.xlk
+*.xll
