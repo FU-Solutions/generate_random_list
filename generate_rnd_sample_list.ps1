@@ -41,7 +41,7 @@
 #>
 ## parametersection
 param(
-	[Parameter(Mandatory=$true,ParameterSetName="SourceFile",HelpMessage="Sourceinputfile for sample creation.")]
+	[Parameter(Mandatory=$false,ValueFromPipeline=$true,ParameterSetName="SourceFile",HelpMessage="Sourceinputfile for sample creation.")]
 	[Alias('source')]
 	[string]$SourceFile,
 	[Parameter(Mandatory=$false,ParameterSetName="OutFile",HelpMessage="File where the output will be written.")]
@@ -64,6 +64,4 @@ $randomlist = for ($i=1; $i -le $amount_sample; $i++) {
 	$SampleObject[(Get-Random -Maximum ($SampleObject.count))]; 
 }
 
-$randomlist | Export-Excel
-
-## digital signature
+$randomlist | Export-Excel $OutFile -WorksheetName Samplelist -AutoSize -AutoFilter
