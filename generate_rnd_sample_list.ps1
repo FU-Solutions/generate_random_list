@@ -47,9 +47,9 @@ param(
 	[Parameter(Mandatory=$false,ParameterSetName="OutFile",HelpMessage="File where the output will be written.")]
 	[Alias('output')]
 	[string]$OutFile="iks-sample.xlsx",
-	[Parameter(Mandatory=$false,ParameterSetName="AmountSample",HelpMessage="Amount of sample in you generated list")]
-	[Alias('amountsample')]
-	[string]$amount_sample="40"
+	[Parameter(Mandatory=$false,ParameterSetName="Samples",HelpMessage="Amount of sample in you generated list")]
+	[Alias('samples')]
+	[Int]$SampleSize="40"
 )
 
 $SampleObject = Import-Excel -Path $SourceFile
@@ -60,7 +60,7 @@ Import-Module -Name ImportExcel
 
 ## main function
 
-$randomlist = for ($i=1; $i -le $amount_sample; $i++) { 
+$randomlist = for ($i=1; $i -le $SampleSize; $i++) { 
 	$SampleObject[(Get-Random -Maximum ($SampleObject.count))]; 
 }
 
