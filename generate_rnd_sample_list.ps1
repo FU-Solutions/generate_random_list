@@ -39,7 +39,9 @@
 .LINK
 	https://github.com/w3ich3rt/generate_random_list
 #>
-## parametersection
+
+## Parameters and variables
+
 param(
 	[Parameter(Mandatory=$false,ValueFromPipeline=$true,ParameterSetName="SourceFile",HelpMessage="Sourceinputfile for sample creation.")]
 	[Alias('source')]
