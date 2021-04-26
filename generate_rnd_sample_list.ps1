@@ -8,10 +8,13 @@
 
 .Parameter SourceFile 
 	Defines the sourcefile from which the sample is generated.
+	No default set - please define an input file.
 .Parameter OutFile 
 	Defines the outputfile for the sample.
+	Default is iks-sample.xlsx.
 .Parameter SampleSize
 	Defines the amount of entries in your sample-list.
+	Default are 40 samples.
 	
 .INPUTS
 	You have to define an excel-list with parameter SourceFile.
@@ -38,18 +41,20 @@
 
 .LINK
 	https://github.com/w3ich3rt/generate_random_list
+.LINK
+	<imagine the link to the block here>
 #>
 
 ## Parameters and variables
 
 param(
-	[Parameter(Mandatory=$false,ValueFromPipeline=$true,ParameterSetName="SourceFile",HelpMessage="Sourceinputfile for sample creation.")]
+	[Parameter(Mandatory=$true,HelpMessage="Sourceinputfile for sample creation.")]
 	[Alias('source')]
 	[string]$SourceFile,
-	[Parameter(Mandatory=$false,ParameterSetName="OutFile",HelpMessage="File where the output will be written.")]
+	[Parameter(Mandatory=$false,HelpMessage="File where the output will be written.")]
 	[Alias('output')]
 	[string]$OutFile="iks-sample.xlsx",
-	[Parameter(Mandatory=$false,ParameterSetName="Samples",HelpMessage="Amount of sample in you generated list")]
+	[Parameter(Mandatory=$false,HelpMessage="Amount of sample in you generated list")]
 	[Alias('samples')]
 	[Int]$SampleSize="40"
 )
@@ -66,4 +71,4 @@ $randomlist = for ($i=1; $i -le $SampleSize; $i++) {
 	$SampleObject[(Get-Random -Maximum ($SampleObject.count))]; 
 }
 
-$randomlist | Export-Excel $OutFile -WorksheetName Samplelist -AutoSize -AutoFilter
+$randomlist | Export-Excel $OutFile -WorksheetName Samplelist -AutoSize -AutoFilter -TableName "Samples"
